@@ -166,7 +166,16 @@ class Device:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["shift"]["value"]
         except KeyError:
             return "error"
-
+#################################################################################################################################################################################       
+#baco hack add            
+    def setHeatingCurve(self,shift,slope):
+        try:
+            #return self.service.setProperty("heating.dhw.temperature","setTargetTemperature","{\"temperature\":"+str(temperature)+"}")
+            return self.service.setProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve","setCurve","{\"shift\":" +str(shift)+",\"slope\":"+str(slope)+"}")
+        except KeyError:
+            return "error"
+#end hack baco
+#################################################################################################################################################################################
     def getHeatingCurveSlope(self):
         try:
             return self.service.getProperty("heating.circuits." + str(self.service.circuit) + ".heating.curve")["properties"]["slope"]["value"]
